@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdarg.h>
-#include "2b_head.h"
+#include "head.h"
 
 // variadic for load array
 void LoadBalls( int count,int *a, ...) 

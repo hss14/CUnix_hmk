@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "2b_head.h"
+#include "head.h"
 
 // a[]: weitht of ball corresponding to sequence number
 // left[]/right[]: sequence numbers of balls on the left/right side of the balance

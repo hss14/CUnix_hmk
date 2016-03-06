@@ -1,5 +1,5 @@
-#ifndef __2B_BADBALL_H__
-#define __2B_BADBALL_H__
+#ifndef __BADBALL_H__
+#define __BADBALL_H__
 
 //void LoadBalls( int, int *, ...) 
 void LoadBalls( int count,int *a, ...);

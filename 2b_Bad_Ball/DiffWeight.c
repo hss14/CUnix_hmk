@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "2b_head.h"
+#include "head.h"
 
 // a[12]: weight of ball corresponding to sequence number
 // 

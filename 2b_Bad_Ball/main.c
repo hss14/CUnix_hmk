@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
-#include "2b_head.h"
+#include "head.h"
 
 int main(int argc, const char *argv[] )
 {
