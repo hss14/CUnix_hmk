@@ -3,5 +3,5 @@
 
 double convert ( fraction x )
 {
-	return double(x.numerator) / double(x.denominator);	
+	return x.numerator / x.denominator;	
 }

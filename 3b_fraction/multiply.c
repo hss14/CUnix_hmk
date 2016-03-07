@@ -3,7 +3,17 @@
 
 fraction multiply ( fraction x, fraction y)
 {
-	int n = x.numerator * y. numerator;
-	int d = x.denomirator * y.denomirator;
-	return construct(n, d);	
+	float n,d;
+	fraction result;
+
+	n = x.numerator * y. numerator;
+	if ( isfinite(n) )
+	{	
+		d = x.denominator * y.denominator;
+		return construct(n, d);
+	}
+	
+	result.numerator = n;
+	result.denominator = 1;
+	return result;		
 }

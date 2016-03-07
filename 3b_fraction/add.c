@@ -3,10 +3,16 @@
 
 fraction add ( fraction x, fraction y)
 {
-	int n, d;
-	if ( !x.denominator || !y.denominator )
-		
-	n = x.numerator * y.denomirator + x.denomirator * y. numerator;
-	d = x.denomirator * y.denomirator;
-	return construct(n, d);	
+	float n, d;
+	fraction result;
+
+	n = x.numerator * y.denominator + x.denominator * y. numerator;
+	if ( isfinite(n) )
+	{
+		d = x.denominator * y.denominator;
+		return construct(n, d);	
+	}
+	result.numerator = n;
+	result.denominator = 1;
+	return result;
 }
