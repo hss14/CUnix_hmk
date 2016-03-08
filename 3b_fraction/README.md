@@ -57,9 +57,9 @@ int main()
 
 编译方法： `make all`
 
-测试方法： `make test`
+测试样例： `make test`
 
-shell中直接执行的合法命令格式：
+shell中的合法执行语句：
 ```shell
 ./myfraction 66 / 2016 =
 # convert to float: must enter 5 parameters seperated by space: the 2nd-numerator, the 4th-denomerator
