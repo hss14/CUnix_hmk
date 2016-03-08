@@ -42,7 +42,7 @@ int main(int argc, const char *argv[])
 				printf("\nwrong arithmetic function symbol!\n");
 				printf("example for 9 arguments: myfunction 12 / 8 + 34 / 9  =\n");
 				printf("    // the  5th argument should only be '+', '-', 'x', or '/' \n");
-				printf("now try again...\n");
+				printf("now try again...\n\n");
 				return -1;
 			}
 		}
@@ -66,7 +66,7 @@ int main(int argc, const char *argv[])
 	printf("example for 9 arguments: myfunction 12 / 8 + 34 / 9  =\n");
 	printf("    // to caculate the four arithmetic functions of 2 fractions\n");
 	printf("    // the  5th argument should be '+', '-', 'x', or '/' \n");
-	printf("now try again...\n");
+	printf("now try again...\n\n");
 	return -2;
 	
 }
