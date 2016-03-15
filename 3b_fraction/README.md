@@ -68,5 +68,5 @@ shell中的合法执行语句：
 # to execute the four basic arithmetic operations: must enter 9 parameters seperated by space:
 # the 5th: select among '+', '-', 'x', '/' to execute corresponding operation
 # the 2nd and the 4th: numerator and denomerator of the first fraction operand
-# the 6th and the 8th: numerator and denomerator of the first fraction operand
+# the 6th and the 8th: numerator and denomerator of the second fraction operand
 ```
