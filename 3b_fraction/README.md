@@ -57,9 +57,9 @@ int main()
 
 编译方法： `make all`
 
-测试方法： `make test`
+测试样例： `make test`
 
-shell中直接执行的合法命令格式：
+shell中的合法执行语句：
 ```shell
 ./myfraction 66 / 2016 =
 # convert to float: must enter 5 parameters seperated by space: the 2nd-numerator, the 4th-denomerator
@@ -68,5 +68,5 @@ shell中直接执行的合法命令格式：
 # to execute the four basic arithmetic operations: must enter 9 parameters seperated by space:
 # the 5th: select among '+', '-', 'x', '/' to execute corresponding operation
 # the 2nd and the 4th: numerator and denomerator of the first fraction operand
-# the 6th and the 8th: numerator and denomerator of the first fraction operand
+# the 6th and the 8th: numerator and denomerator of the second fraction operand
 ```
