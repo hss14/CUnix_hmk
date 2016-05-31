@@ -17,32 +17,24 @@ clean: $(OBJS) freport
 
 .PHONY: test
 test:
+	# example of legal augments:
 	#
-	# part 1
+	# =======  function A as demanded =======
+	# ./freport PATHNAME     
+	# ===> ls all files in PATHNAME and whether has the following specific features:
+	# 	* "long time no access" if not accessed in the last 30 days
+	# 	* "huge file" if size beyond 1M bytes
+	# 	* "accessed during specific period" if accessed during the week before last
+	# 	* "being read" if is being read by other users exactly when it is traversed by this program
 	#
-	./myfraction 66 / 2016 =
+	# =======  function B as demanded =======
+	# ./freport --accessed 3 PATHNAME  
+	# ===> ls files in PATHNAME that have been accessed with 3 days
 	#
-	# part 2
+	# ./freport --size-beyond 1000000 PATHNAME  
+	# ===> ls files in PATHNAME whose size is bigger than 1MB
 	#
-	./myfraction 0 / 9 / 7 / 14 =	
-	# 
-	# part 3: play with INFINITY
-	#
-	./myfraction -77 / 0 x -1 / 0 =	
-	# 
-	# part 4: play with and NAN
-	#
-	./myfraction 4 / 0 + 0 / 0 =	
-	#
-	# part 5: play with zero in numerator of the divisor
-	#
-	./myfraction 24 / 198 / 0 / -77 =
-	#
-	# part 6: test illegal input parameters
-	#
-	-./myfraction 1 / 2 + 3 / 
-	#
-	-./myfraction 1 / 2 @ 3 / 4 =
-	#
-	# end of test
-	#
+	# ======= function C as demanded =======
+	# ./freport --users-nologin 3 
+	# ===> list users who has never logged in in the last 3 days
+
