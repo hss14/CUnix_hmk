@@ -1,11 +1,11 @@
 #include "freport.h"
 
+static const int NO_ACC_SECS = 30 * 24 * 60 * 60;  // no access in the last 30 days
+static const int BYTES_BEYOND = 1000000;   //1M
+static const int ACC_BETW[2] = { 7 * 24*60*60, 14 * 24*60*60 };   // files accessed during the week before last
+
 int A_pr_attb( char *fullname, struct stat *buf, struct timespec *now, int opt ) 
 {
-	static const int NO_ACC_SECS = 30 * 24 * 60 * 60;  // no access in the last 30 days
-	static const int BYTES_BEYOND = 1000000;   //1M
-	static const int ACC_BETW[2] = { 7 * 24*60*60, 14 * 24*60*60 };   // files accessed during the week before last
-
 	uid_t uid = geteuid();
 	char *cmdstring;
 	char filetmp[100];

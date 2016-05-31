@@ -5,11 +5,13 @@ int main( int argc, char *argv[] )
 
 	const struct option long_options[] = {
 		{ "accessed", 1, NULL, 'a' },
-		{ "size-beyond",1, NULL, 's' },
+		{ "size-beyond", 1, NULL, 's' },
+		{ "users-nologin", 1, NULL, 'u' },
 		{ NULL, 0, NULL, 0 } 
 	};
-	const char *short_options = "a:s:";
+	const char *short_options = "a:s:u:";
 	int flag_options = 0;
+	int flag_users = 0;
 	int c;
 	int opt = 0;
 	struct timespec now;
@@ -23,6 +25,7 @@ int main( int argc, char *argv[] )
 		printf("./freport PATHNAME     //ls all files in PATHNAME and whether has specific features\n");
 		printf("./freport --accessed 3 PATHNAME  //ls files in PATHNAME that have been accessed with 3 days\n");
 		printf("./freport --size-beyond 1000000 PATHNAME  //ls files in PATHNAME whose size is bigger than 1MB\n");
+		printf("./freport --users-nologin 3 //list users who has never logged in in the last 3 days\n");
 		printf("exit.... please try again....\n\n");
 		exit(-1);
 	}
@@ -42,6 +45,11 @@ int main( int argc, char *argv[] )
 				printf("==== report files with size beyond %d bytes ====\n", opt);
 				myfun = B_s_pr_huge;
 				break;
+			case 'u':
+				opt = atoi(optarg);
+				printf("=== report users who has never logged in in the last %d days ===\n", opt);
+				flag_users = 1;
+				break;
 			default:
 				printf("invalid options...\n");
 		}
@@ -57,7 +65,14 @@ int main( int argc, char *argv[] )
 		myfun = A_pr_attb;
 	}
 
-	printf(" PATH=%s\n============================================================\n\n", argv[optind] );
+	if( flag_users )
+	{
+		if( (i = report_users(opt)) != 0 )
+			fprintf( stderr, "error report_users: error %d\n", i );
+		exit(0);
+	}
+
+	printf("================= STARTPOINT =%s\n====================\n\n", argv[optind] );
 
 	if( clock_gettime(CLOCK_REALTIME, &now) == -1 )
 	{
