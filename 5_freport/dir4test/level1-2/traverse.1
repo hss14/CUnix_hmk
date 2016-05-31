@@ -1,18 +1,14 @@
 #include "freport.h"
 
-int traverse( char *pathname, int myfun(), struct timespec *now, int opt )
+int traverse( char *pathname, int myfun(), struct timespec *now, int opt, const char *startpoint, int check4symb )
 {
 	DIR *dirp;
 	struct dirent *pentry;
 	struct stat buf;
 	char *fullname;
-	char *symb_content;
+	char *symb_name;
 	static int fullen = 128;
 	int pathlen, filelen;
-
-#ifdef HSSDEBUG
-	fprintf(stdout, "start traverse : %s: ", pathname);
-#endif
 
 	if( ( lstat(pathname, &buf) ) == -1 )
 	{
@@ -20,15 +16,15 @@ int traverse( char *pathname, int myfun(), struct timespec *now, int opt )
 		return -1;
 	}
 
+	if( (buf.st_nlink > 1) || ( check4symb == 1 ) )
+	{
+		if( hashcheck( buf.st_ino ) )   // has been traversed
+			return 0;
+	}
+
 
 	if( S_ISDIR(buf.st_mode) )
 	{
-#ifdef HSSDEBUG
-		fprintf(stdout, "\n==== directory ====\n");
-#endif
-		if( hashcheck( buf.st_ino ) )   // has been traversed
-			return 0;
-
 		if( ( dirp = opendir( pathname ) ) == NULL )
 		{
 			fprintf( stderr, "error open dir: %s\n", pathname);
@@ -52,7 +48,7 @@ int traverse( char *pathname, int myfun(), struct timespec *now, int opt )
 			strcat( fullname, "/\0");
 			strcat( fullname, pentry->d_name ); 
 
-			traverse( fullname, myfun, now, opt );
+			traverse( fullname, myfun, now, opt, startpoint, 0 );
 			
 		}
 		free(fullname);	
@@ -60,47 +56,27 @@ int traverse( char *pathname, int myfun(), struct timespec *now, int opt )
 	}
 	else if( S_ISLNK(buf.st_mode) )
 	{
-		symb_content = malloc( buf.st_size + 1 );
-		if( readlink( pathname, symb_content, buf.st_size+1) != buf.st_size )
+		symb_name = malloc( buf.st_size + 1 );
+		if( readlink( pathname, symb_name, buf.st_size+1) != buf.st_size )
 		{
 			fprintf(stderr, "READLINK ERROR %s\n", pathname);
 			return -2;
 		}
-		symb_content[buf.st_size] = '\0';
+		symb_name[buf.st_size] = '\0';
 			
-		if( (symb_content[0]!='/') && (symb_content[0]!='.') )  //relative path
-		{
-			pathlen = strlen( pathname ); // exclulde \0
-			fullname = malloc(pathlen + buf.st_size + 2);
-
-			strcpy( fullname, pathname );
-			strcpy( strrchr(fullname, '/'), "/\0" );
-			strcat( fullname, symb_content ); 
-
-#ifdef HSSDEBUG
-			fprintf(stdout, "\nGot symb_name = %s\n", fullname );
-#endif
-			traverse( fullname, myfun, now, opt );
-			free(fullname);
+		if( buf.st_size >= strlen(startpoint) )
+		{	
+			if( strncmp( symb_name, startpoint, strlen(startpoint) ) == 0 ) 
+				// symbolic link to dir/file within startpoint, ignore
+				return 0;
 		}
 		else
-		{
-#ifdef HSSDEBUG
-			fprintf(stdout, "\nUse symb_content = %s\n", symb_content);
-#endif
-			traverse( symb_content, myfun, now, opt );
-		}
-		free( symb_content);
+			traverse( symb_name, myfun, now, opt, startpoint, 1 );
+
+		free( symb_name);
 	}
 	else
 	{
-		if( hashcheck( buf.st_ino ) )   // has been traversed
-		{
-#ifdef HSSDEBUG
-			fprintf(stdout, "skipping......has been traversed\n");
-#endif
-			return 0;
-		}
 		myfun( pathname, &buf, now, opt );
 	}
 

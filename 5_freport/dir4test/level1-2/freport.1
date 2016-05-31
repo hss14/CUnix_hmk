@@ -68,7 +68,7 @@ int main( int argc, char *argv[] )
 	for (i=0; i<100; i++)
 		hashlist[i] = NULL;
 
-	traverse( argv[optind], myfun, &now, opt);	
+	traverse( argv[optind], myfun, &now, opt, argv[optind], 0 );	
 
 	// free hashlist
 	for(i=0; i<100; i++)
