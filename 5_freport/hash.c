@@ -2,7 +2,7 @@
 
 int hashcheck( long int inode )
 {
-	int index = inode % 100;
+	int index = inode % SizeHashList;
 	struct mynode *pnode;
 	struct mynode *prev_node = NULL;
 	struct mynode *newnode;

@@ -80,13 +80,13 @@ int main( int argc, char *argv[] )
 		exit(-2);
 	}
 
-	for (i=0; i<100; i++)
+	for (i=0; i< SizeHashList ; i++)
 		hashlist[i] = NULL;
 
 	traverse( argv[optind], myfun, &now, opt);	
 
 	// free hashlist
-	for(i=0; i<100; i++)
+	for(i=0; i< SizeHashList; i++)
 		if ( hashlist[i] != NULL )
 		{
 			pnode = hashlist[i];

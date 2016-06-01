@@ -11,13 +11,15 @@
 #include<time.h>
 #include<sys/time.h>
 
+#define SizeHashList 1000
+
 struct mynode
 {
 	long int inode;
 	struct mynode* next;
 };
 
-struct mynode *hashlist[100];
+struct mynode *hashlist[ SizeHashList ];
 
 int report_users( int days );
 
