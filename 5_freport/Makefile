@@ -1,7 +1,7 @@
 CFILES = $(wildcard *.c)
 OBJS = $(CFILES:.c=.o)
 CC = gcc
-CFLAGS = -Wall -g -DHSSDEBUG
+CFLAGS = -Wall -g  #-DHSSDEBUG
 
 all: freport
 
