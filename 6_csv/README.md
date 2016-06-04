@@ -2,10 +2,12 @@
 
 纯文本csv文件中有一个表，大致格式如下：
 
+```
 Student id, Name, Department, Age
 2014310540, Hao Shanshan, E.E., 23
 2015310044,   Dou Sen,     D.A.,        22
 ...
+```
 
 设计一种二进制存储格式以存放这样的表。字节序为BigEndian
 
@@ -14,13 +16,14 @@ Student id, Name, Department, Age
 1.  将csv文本文件进行格式转换，存储在二进制文件中
 2.  从二进制文件中读取表，打印出来
 
+
 ##**2. 设计思路**
 
 设计表存储2进制文件格式如下：
 
 文件头用`uint32_t`类型存储本表中一共有多少条记录。
 
-对csv表格中的每条记录，在2进制文件中用前后2条数据进行存储：结构体`StuRecord` —— 学号、年龄、院系、姓名长度（含`'\0'`）和字符串数组stuname。
+对csv表格中的每条记录，在2进制文件中用前后2条数据进行存储：结构体`StuRecord` —— 学号、年龄、院系、姓名长度（含`'\0'`）和字符串数组`stuname`。
 
 ```c
 struct StuRecord {
@@ -31,7 +34,7 @@ struct StuRecord {
 };
 ```
 
-每个10进制数字用4bit足够存储，因此每个`uint8_t`类型可存储两个数字，如"39"可存储为"00111001"。该转换及其逆过程分别用如下函数处理：
+每个10进制数字用4bit足够存储，因此每个`uint8_t`类型可存储两个数字，如`"39"`可存储为`"00111001"`。该转换及其逆过程分别用如下函数处理：
 
 ```c
 uint8_t convert( char num1, char num2 );
@@ -49,10 +52,15 @@ int reverse(uint8_t num, int index);
 #define MaxLine 512
 #define MaxName 255
 ```
+主功能实现函数为：
 
-函数 `int csv2bin( const char *filecsv, const char *filebin );` 实现功能1。函数中对csv文件中数据的合法性进行了检查，考虑了各种边界情况，鲁棒性较好。测试样例 test.csv 对此进行了测试。
+```c
+int csv2bin( const char *filecsv, const char *filebin ); 
+// 实现功能1。函数中对csv文件中数据的合法性进行了检查，考虑了各种边界情况，鲁棒性较好。测试样例 test.csv 对此进行了测试。
 
-函数 `int pr_bin(const char *filebin);` 实现功能2。
+int pr_bin(const char *filebin); 
+// 实现功能2。
+```
 
 ##**3.编译与测试**
 编译方法： `make all`
