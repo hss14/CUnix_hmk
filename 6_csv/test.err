@@ -1,0 +1,7 @@
+illegal csv format line 4: Department longer than 8 characters, truncate
+illegal record line 7, no age segment found!
+illegal record line 16: too long!
+error convert: illegal parameter num2 = 2
+illegal record line 18: illegal id segment!
+illegal csv format line 21:name too long, truncate to 254 characters
+illegal record line 23: too long!
