@@ -56,10 +56,10 @@ int reverse(uint8_t num, int index);
 
 ```c
 int csv2bin( const char *filecsv, const char *filebin ); 
-// 实现功能1。函数中对csv文件中数据的合法性进行了检查，考虑了各种边界情况，鲁棒性较好。测试样例 test.csv 对此进行了测试。
+// 实现功能1。函数中对csv文件中数据的合法性进行了检查，考虑了各种边界情况，鲁棒性较好。测试样例 test.csv 对此进行了测试
 
 int pr_bin(const char *filebin); 
-// 实现功能2。
+// 实现功能2
 ```
 
 ##**3.编译与测试**
