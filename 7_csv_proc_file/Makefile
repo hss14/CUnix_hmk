@@ -1,7 +1,7 @@
 CFILES = $(wildcard *.c)
 OBJS = $(CFILES:.c=.o)
 CC = gcc
-CFLAGS = -Wall -g  #-DHSSDEBUG
+CFLAGS = -Wall -g #-DCLEARUP #-DHSSDEBUG
 
 all: csv7
 
@@ -45,7 +45,11 @@ test:
 	# 	"test.csv.err": 
 	# 		==> illegal records, some discarded while others truncated; also log all the other errors occured
 	#
-	#
+	# to keep things tidy, use -DCLEARUP when make (refer to "CFLAGS": line 4) to clear up directory tmp/ automatically 
+	# under this circumstance:
+	# 1. do not "rm -r tmp/" manually, otherwise an error will occur
+	# 2. cannot check nor use "csv7 p" to print out tmp/test.bin.1(2,3..) or tmp/test.csv.1(2,3...) 
+	# 
 	#
 	#
 	# ============ print out contents of each bin file: "name_of_bin_file"(s) ============

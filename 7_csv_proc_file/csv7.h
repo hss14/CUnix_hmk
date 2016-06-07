@@ -9,6 +9,7 @@
 #include <fcntl.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
+#include <dirent.h>
 
 #define MaxLine 512
 #define MaxName 255
@@ -38,7 +39,9 @@ int child_csv2bin( const char *csvsplit, const char *binsplit, const char *badre
 
 void addlist( pid_t pid, struct pidlist **head);
 pid_t pop( struct pidlist **head);
+#ifdef HSSDEBUG
 void printlist( struct pidlist *head);
+#endif
 
 int pr_bin(const char *filebin);
 

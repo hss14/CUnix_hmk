@@ -278,6 +278,29 @@ int csv2bin( const char *filecsv, const char *filebin )
 		return -8;
 	}
 
+#ifdef CLEARUP
+	DIR *dp;
+	struct dirent *dirp;
+	if( (dp=opendir(dir) )==NULL )
+		fprintf(fpbad, "error open directory %s while cleaning up\n", dir);
+	else if( chdir(dir)<0 )
+		fprintf(fpbad, "error chdir to %s\n", dir);
+	else
+	{
+		while( (dirp=readdir(dp)) != NULL )
+		{
+			if( strcmp(dirp->d_name, ".")==0 || strcmp(dirp->d_name, "..")==0 )
+				continue;
+			unlink(dirp->d_name);
+		}
+		closedir(dp);
+	}
+	if( chdir("..")<0 )
+		fprintf(fpbad, "error chdir to \"..\"\n" );
+	else
+		rmdir(dir);
+#endif
+
 	free(binsplit);
 	free(csvsplit);
 	free(longrecords);
