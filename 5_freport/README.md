@@ -26,20 +26,21 @@ freport [--accessed DAYS] [--size-beyond BYTES] [--users-nologin DAYS] [PATHNAME
 
 ##**2.解决思路与代码结构**
 
-**report_users.c**
+####**report_users.c**
 ```c
 int report_users( int days );
 //实现功能C。打印出所有days天内没有登陆过的用户。
 ```
 用`system`函数执行`lastlog`命令实现。
+
 为了排除从来不登陆的系统账户的影响，限定只考察uid属于以下范围的帐号：
 -   [`RANGE_USERS[0]`, `RANGE_USERS[1]`]
-	-   在我的系统里为[1000, 65533], 低于1000的都是系统帐号， 65534是nobody帐号。
-	-   不是很清楚这个数值的可移植性。
+	-   在我的系统里为[1000, 65533], 低于1000的都是系统帐号， 65534是nobody帐号
+	-   不是很清楚这个数值的可移植性
 -   `UID_ROOT`（superuser帐号），一般为0
 
 
-**print_attribute.c**
+####**print_attribute.c**
 ```c
 int A_pr_attb( char *fullname, struct stat *buf, struct timespec *now, int opt );
 //实现功能A。对文件名为 fullname 的文件（已经得到stat结构体、当前时间）打印文件名、是否有前述4个属性
@@ -48,40 +49,40 @@ int B_s_pr_huge( char *fullname, struct stat *buf, struct timespec *now, int opt
 int B_a_pr_acced( char *fullname, struct stat *buf, struct timespec *now, int opt );
 // 如果文件在 opt 天内访问过，则打印出文件名 fullname
 ```
--	这些属性大部分都可以容易地从`stat`结构体中得到。
--	对功能A中的“是否正在被其他用户阅读（打开）”属性，则通过`system` 执行 `lsof -u ^1000 fullname`(排除uid=1000的当前用户）结果是否为空得到。
+-	这些属性大部分都可以容易地从`stat`结构体中得到
+-	对功能A中的“是否正在被其他用户阅读（打开）”属性，则通过`system` 执行 `lsof -u ^1000 fullname`(排除uid=1000的当前用户）结果是否为空得到
 
 
-**hash.c**
+####**hash.c**
 ```c
 int hashcheck( long int inode );
 ```
--	为处理文件/目录的软/硬链接，防止重复访问与陷入回环.
+-	为处理文件/目录的软/硬链接，防止重复访问与陷入回环
 -	对`inode`除法散列建立hash表（按 `inode % SizeHashList`的余数）记录所有访问过的文件（含目录）
 -	可根据文件树的大小选择合适的`SizeHashList`值
 -	`traverse`访问每个文件（目录）前用此函数检查该表
 	-	若`inode`已存在，返回`1`，说明已经遍历过，直接放弃
-	-	否则返回`0`，在表中新增该`inode`，对其访问处理。
+	-	否则返回`0`，在表中新增该`inode`，对其访问处理
 
 
-**traverse.c**
+####**traverse.c**
 ```c
 int traverse( char *pathname, int myfun(), struct timespec *now, int opt );
 ```
--   通过递归调用自己，实现对`pathname`的全遍历。每读到一个目录，有两种遍历文件树的思路，这里采用的是第二种。
+-   通过递归调用自己，实现对`pathname`的全遍历。每读到一个目录，有两种遍历文件树的思路(这里采用的是第二种):
 	- `chdir`到该目录下，直接对文件名遍历
 	- 不改变`cwd`，更新路径名，使用（相对初始cwd的或者绝对路径的）全路径文件名遍历
 -   用`lstat`判断`pathname`的类型：
 	-	目录： 读取目录中的每个文件，递归调用`traverse`
-	-	符号链接：用`readlink`函数获取符号链接到的文件名，对其`traverse`。注意符号链接的内容可能是相对该符号链接所在目录的路径，此时需要进一步处理。
+	-	符号链接：用`readlink`函数获取符号链接到的文件名，对其`traverse`。注意符号链接的内容可能是相对该符号链接所在目录的路径，此时需要进一步处理
 	-	其他文件：调用`myfun`函数执行A/B功能
 
 
-**freport.c**
+####**freport.c**
 ```c
-main.c
+int main( int argc, cahr *argv[]);
 ```
-使用`getopt`库函数实现选项解析，对功能C调用`report_users`函数，对功能A/B，调用以`print_attribute.c`中相应的函数的指针为参数的`traverse`函数进行遍历、打印等操作。
+使用`getopt`库函数实现选项解析，对功能C调用`report_users`函数; 对功能A/B，调用以`print_attribute.c`中相应的函数的指针为参数的`traverse`函数进行遍历、打印等操作。
 
 
 ##**3.编译测试**
