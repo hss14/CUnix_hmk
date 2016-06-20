@@ -18,6 +18,7 @@ clean: $(OBJS) csv7
 .PHONY: clean-intermediate	
 # ========== remove all the intermediate files remained from the last test
 clean-intermediate: $(wildcard *.err) $(wildcard *.long) $(wildcard *.bin) $(wildcard *.log) 
+	rm $^
 	rm -r tmp/
 
 .PHONY: test
