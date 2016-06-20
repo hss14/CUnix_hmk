@@ -28,6 +28,6 @@
 - **week 5**
   - **7** csv父子进程文件通信
 - **week 6-7**
-  - **8** csv                                                      //unfinished
+  - **8** csv父子进程通过IPC通信（pipe, mmap）
 - **week 8-9**
   - **9** csv                                                      //unfinished
