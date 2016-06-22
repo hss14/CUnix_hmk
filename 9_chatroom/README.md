@@ -106,8 +106,8 @@ server/make all
   
 测试方法说明:  
 ```shell
-client/make all
-server/make all
+client/make test
+server/make test
 ```  
   
   
