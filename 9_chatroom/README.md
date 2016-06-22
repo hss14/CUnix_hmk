@@ -4,12 +4,12 @@
 每个client向server发送消息后，server会转发给所有其他client。          
 每个client可以随时自由进出聊天室。          
 server可以强行关闭聊天室，并在关闭前向所有在线client发警告。          
-* 没有实现超时、心跳功能。        
+(没有实现超时、心跳功能)        
           
           
 ##**2. 设计思路**  
         
-server需要记录在线client的信息（如昵称等），通过维护`struct cinfo`链表实现。
+server 需要记录在线 client 的信息（如昵称等），通过维护`struct cinfo`链表实现。
 
 ```c
 struct cinfo {
@@ -34,12 +34,14 @@ int change_name(int fd, char *s, struct cinfo **phead, FILE *logfp);            
                 
                 
 设计“协议”（消息格式）如下：
+
 ```c
 struct c_mesg {
 	int type;
 	char mesg[MAXMSG];
 };
 ```
+
 |type|消息类型|字符串mesg[]内容|
 |-|-|-|
 |1|设置昵称|用户昵称|
@@ -48,27 +50,29 @@ struct c_mesg {
                 
                 
                 
-**server主函数思路：**
+**server主函数思路：**    			
           
-借鉴了GNU C Library mannual中的示例代码：<http://www.gnu.org/software/libc/manual/html_node/Server-Example.html>          
+借鉴了 GNU C Library mannual 中的示例代码：<http://www.gnu.org/software/libc/manual/html_node/Server-Example.html>          
 
-采用I/O多路复用方法。将`STDIN`、监听套接字、每个会话套接字加入`select`的关注列表中，循环`select`，每次`select`返回时判断：  
--   若`STDIN`活跃，表明server的master希望关闭server。则通知每个在线client退出，善后之后退出。
--   若监听套接字活跃，表明有新的client希望进入聊天室，`accept`产生新的会话套接字，将套接字加入`select`的关注列表、client信息加入server维护的`cinfo`链表。
--   若会话套接字活跃，调用`mesg_from_client`函数处理来自该套接字的消息
-对于出错或要求退出的client，从select关注列表和`cinfo`链表中删除记录，关闭套接字。
+采用 I/O多路复用方法。将`STDIN`、监听套接字、每个会话套接字加入`select`的关注列表中，循环`select`，每次`select`返回时判断：  
+-   若`STDIN`活跃，表明 server 的 master 希望关闭 server。则通知每个在线 client 退出，善后之后退出。
+-   若监听套接字活跃，表明有新的 client 希望进入聊天室，`accept`产生新的会话套接字，将套接字加入`select`的关注列表、client 信息加入 server 维护的`cinfo`链表。
+-   若会话套接字活跃，调用`mesg_from_client`函数处理来自该套接字的消息。对于出错或要求退出的 client，从 select 关注列表和`cinfo`链表中删除记录，关闭套接字。
         
         
 ```c
 int mesg_from_client( int filedes, FILE *logfp, struct cinfo **phead);
 ```
-从`filedes`套接字文件描述符中读消息，如前所述，处理`struct c_mesg`消息，根据type判断消息类型进行处理，包括更改昵称、发送相应的处理结果系统通知给该client、记录日志、提取消息内容字符串`mesg[]`群发给用户等。
+
+从`filedes`套接字文件描述符中读消息，如前所述，处理`struct c_mesg`消息，根据 type 判断消息类型进行处理，包括更改昵称、发送相应的处理结果系统通知给该 client、记录日志、提取消息内容字符串`mesg[]`群发给用户等。
           
           
           
-**client主函数思路：**
-指数退让不断尝试对server进行`connect`，等待`MAXSLEEP`秒仍失败时放弃并退出。        
-I/O多路复用，用`select`循环监听`STDIN`和套接字，`select`每次返回时判断：
+**client主函数思路：**    				
+
+指数退让不断尝试对server进行`connect`，等待`MAXSLEEP`秒仍失败时放弃并退出。          		
+I/O多路复用，用`select`循环监听`STDIN`和套接字，`select`每次返回时判断：  		
+
 -   若套接字活跃，将读取的内容打印到标准输出。
     -   其中，若字串内容== server的关闭通知，说明server即将关闭，则关闭套接字并退出。
 -   若STDIN活跃，则根据读取的内容判断用户希望进行的操作：
@@ -79,6 +83,7 @@ I/O多路复用，用`select`循环监听`STDIN`和套接字，`select`每次返
           
           
 **一些辅助函数：**
+
 ```c
 int pr_time(char *buf, size_t maxsize);
 //按 “YYYY-MM-DD 星期几 HH:MM:SS” 格式将本地时间打印到`buf`中
