@@ -35,8 +35,8 @@ int main()
 	} 	
 
 	pr_result( ncup );
-	free(rec.prev);
 	destroy_queue( &myqueue );
+	free(rec.prev);
 
 	exit(0);
 }

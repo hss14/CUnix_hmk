@@ -61,9 +61,15 @@ printf("(%d, %d)\n", myqueue->head, myqueue->tail);
 void destroy_queue(struct queue *myqueue)
 {
 	int i;
+#ifdef HSSDEBUG
+printf("destroy begins\n");
+#endif
 	for ( i=0; i <= myqueue->tail; i++ )
 		free( myqueue->room[i] );
 	free( myqueue->room );
+#ifdef HSSDEBUG
+printf("destroy ends\n");
+#endif
 }
 
 
