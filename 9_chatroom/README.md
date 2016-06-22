@@ -42,15 +42,16 @@ struct c_mesg {
 };
 ```
 
+
 |type|消息类型|字符串mesg[]内容|
-|-|-|-|
+|:-:|:-:|:-:|
 |1|设置昵称|用户昵称|
 |2|群发消息|消息内容|
 |3|用户退出|无意义|
                 
                 
                 
-**server主函数思路：**    			
+####**server主函数思路：**    			
           
 借鉴了 GNU C Library mannual 中的示例代码：<http://www.gnu.org/software/libc/manual/html_node/Server-Example.html>          
 
@@ -68,7 +69,18 @@ int mesg_from_client( int filedes, FILE *logfp, struct cinfo **phead);
           
           
           
-**client主函数思路：**    				
+####**一些辅助函数：**
+
+```c
+int pr_time(char *buf, size_t maxsize);
+//按 “YYYY-MM-DD 星期几 HH:MM:SS” 格式将本地时间打印到`buf`中
+int make_socket_server( int portnumber );
+//创建TCP socket，绑定到端口`portnumber`，返回sockfd
+```
+          
+          
+                    
+####**client主函数思路：**    				
 
 指数退让不断尝试对server进行`connect`，等待`MAXSLEEP`秒仍失败时放弃并退出。          		
 I/O多路复用，用`select`循环监听`STDIN`和套接字，`select`每次返回时判断：  		
@@ -82,17 +94,7 @@ I/O多路复用，用`select`循环监听`STDIN`和套接字，`select`每次返
           
           
           
-**一些辅助函数：**
 
-```c
-int pr_time(char *buf, size_t maxsize);
-//按 “YYYY-MM-DD 星期几 HH:MM:SS” 格式将本地时间打印到`buf`中
-int make_socket_server( int portnumber );
-//创建TCP socket，绑定到端口`portnumber`，返回sockfd
-```
-          
-          
-          
 ##**3.编译与测试**  
     
 编译方法：
