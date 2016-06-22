@@ -1,0 +1,441 @@
+
+
+===============================================
+--- server launched at 2016-06-22 Wednesday 02:26:50 --
+CONNECT:
+	from host 127.0.0.1, port -13367, 2016-06-22 Wednesday 02:26:51
+	sockfd=5, id=0
+CONNECT:
+	from host 127.0.0.1, port -13366, 2016-06-22 Wednesday 02:26:57
+	sockfd=6, id=1
+CONNECT:
+	from host 127.0.0.1, port -13365, 2016-06-22 Wednesday 02:26:58
+	sockfd=7, id=2
+
+MSG from 2( ), fd=7:
+	hello
+
+
+MSG from 0( ), fd=5:
+	who are you
+
+
+MSG from 2( ), fd=7:
+	dare you
+
+
+CHANGE NICKNAME:fd 7, id 2, to name "lord bolton"
+
+CHANGE NICKNAME:fd 5, id 0, to name "snow"
+
+CHANGE NICKNAME:fd 6, id 1, to name "sansa stark"
+
+MSG from 2(lord bolton), fd=7:
+	oh sansa
+
+
+MSG from 2(lord bolton), fd=7:
+	my beloved wife
+
+
+MSG from 2(lord bolton), fd=7:
+	there is no need for battle
+
+
+MSG from 0(snow), fd=5:
+	you are right
+
+
+MSG from 0(snow), fd=5:
+	just you and me
+
+
+MSG from 2(lord bolton), fd=7:
+	are you willing to see your young brother dead just because you won't kneel?
+
+
+MSG from 1(sansa stark), fd=6:
+	how can we know you have him
+
+
+MSG from 2(lord bolton), fd=7:
+	look
+
+
+MSG from 2(lord bolton), fd=7:
+	oh right
+
+
+MSG from 2(lord bolton), fd=7:
+	which snow are you
+
+
+CHANGE NICKNAME:fd 5, id 0, to name "john snow"
+
+MSG from 0(john snow), fd=5:
+	john sonw
+
+
+MSG from 2(lord bolton), fd=7:
+	he is good
+
+
+MSG from 1(sansa stark), fd=6:
+	you are dying tomorrow, lord bolton
+
+CONNECT:
+	from host 127.0.0.1, port -13359, 2016-06-22 Wednesday 02:30:53
+	sockfd=8, id=3
+
+CHANGE NICKNAME:fd 8, id 3, to name "no one"
+
+MSG from 3(no one), fd=8:
+	a girl is no one
+
+
+MSG from 1(sansa stark), fd=6:
+	have a good sleep
+
+
+MSG from 2(lord bolton), fd=7:
+	you are fine men
+
+
+MSG from 2(lord bolton), fd=7:
+	I wonder which part will my dogs eat first, your eyes, or your balls?
+
+
+MSG from 2(lord bolton), fd=7:
+	tomorrow morning, then
+
+DISCONNECT: sockfd 7, id 2 last nickname lord bolton
+
+MSG from 1(sansa stark), fd=6:
+	you know nothing, john snow
+
+
+MSG from 0(john snow), fd=5:
+	I'll protect you
+
+
+MSG from 1(sansa stark), fd=6:
+	no one can protect me
+
+
+MSG from 3(no one), fd=8:
+	I'm no one =.=
+
+
+MSG from 1(sansa stark), fd=6:
+	arya!
+
+
+MSG from 3(no one), fd=8:
+	a girl is arya stark of winterfell
+
+
+MSG from 0(john snow), fd=5:
+	you are back!
+
+
+MSG from 1(sansa stark), fd=6:
+	have a good sleep before the battle
+
+DISCONNECT: sockfd 6, id 1 last nickname sansa stark
+
+MSG from 0(john snow), fd=5:
+	you and your needle!
+
+
+MSG from 3(no one), fd=8:
+	yeah
+
+
+MSG from 3(no one), fd=8:
+	I'll help you tomorrow
+
+
+MSG from 3(no one), fd=8:
+	good night, brother
+
+DISCONNECT: sockfd 8, id 3 last nickname no one
+
+MSG from 0(john snow), fd=5:
+	good night
+
+DISCONNECT: sockfd 5, id 0 last nickname john snow
+CONNECT:
+	from host 127.0.0.1, port -13347, 2016-06-22 Wednesday 02:35:51
+	sockfd=5, id=0
+CONNECT:
+	from host 127.0.0.1, port -13346, 2016-06-22 Wednesday 02:36:04
+	sockfd=6, id=1
+
+MSG from 0( ), fd=5:
+	help me
+
+
+MSG from 1( ), fd=6:
+	oh my dear lady
+
+
+MSG from 1( ), fd=6:
+	only if you will marry me
+
+
+MSG from 1( ), fd=6:
+	and I'll be lord of winterfell
+
+
+MSG from 0( ), fd=5:
+	I promise
+
+the master is inpatient.  server shutting down.
+---  2016-06-22 Wednesday 02:36:40 ---
+==============================================
+
+
+
+===============================================
+--- server launched at 2016-06-22 Wednesday 02:43:20 --
+CONNECT:
+	from host 127.0.0.1, port -13328, 2016-06-22 Wednesday 02:43:25
+	sockfd=5, id=0
+CONNECT:
+	from host 127.0.0.1, port -13327, 2016-06-22 Wednesday 02:43:35
+	sockfd=6, id=1
+
+MSG from 1( ), fd=6:
+	hello
+
+CONNECT:
+	from host 127.0.0.1, port -13324, 2016-06-22 Wednesday 02:43:46
+	sockfd=7, id=2
+
+MSG from 2( ), fd=7:
+	I'm new 
+
+
+MSG from 1( ), fd=6:
+	yeah, everybody please set your  nickname
+
+
+CHANGE NICKNAME:fd 6, id 1, to name "eagle"
+
+CHANGE NICKNAME:fd 5, id 0, to name "chicken"
+
+MSG from 0(chicken), fd=5:
+	donw
+
+
+MSG from 0(chicken), fd=5:
+	done, sorry for typo
+
+
+MSG from 1(eagle), fd=6:
+	good
+
+
+MSG from 2( ), fd=7:
+	sorry but I don't know how to set nickname
+
+
+MSG from 0(chicken), fd=5:
+	oh shit my dad is home
+
+
+MSG from 0(chicken), fd=5:
+	leaving
+
+DISCONNECT: sockfd 5, id 0 last nickname chicken
+DISCONNECT: sockfd 6, id 1 last nickname eagle
+the master is inpatient.  server shutting down.
+---  2016-06-22 Wednesday 02:45:35 ---
+==============================================
+
+
+
+
+===============================================
+--- server launched at 2016-06-22 Wednesday 17:07:54 --
+CONNECT:
+	from host 127.0.0.1, port -29046, 2016-06-22 Wednesday 17:07:55
+	sockfd=5, id=0
+CONNECT:
+	from host 127.0.0.1, port -29045, 2016-06-22 Wednesday 17:07:56
+	sockfd=6, id=1
+CONNECT:
+	from host 127.0.0.1, port -29044, 2016-06-22 Wednesday 17:07:56
+	sockfd=7, id=2
+
+MSG from 2( ), fd=7:
+	hello
+
+
+MSG from 0( ), fd=5:
+	who are you
+
+
+MSG from 1( ), fd=6:
+	we should all set our nickname
+
+
+MSG from 2( ), fd=7:
+	well 
+
+
+MSG from 2( ), fd=7:
+	are we the only three using the chatroom
+
+
+MSG from 1( ), fd=6:
+	seems so
+
+
+MSG from 2( ), fd=7:
+	well 
+
+
+MSG from 2( ), fd=7:
+	it's stupid
+
+
+MSG from 0( ), fd=5:
+	shhhhh!
+
+
+MSG from 0( ), fd=5:
+	be careful!
+
+
+MSG from 1( ), fd=6:
+	why
+
+
+MSG from 0( ), fd=5:
+	the master is watching you
+
+
+MSG from 0( ), fd=5:
+	he may shut the chatroom up because you said it was stupid!
+
+
+MSG from 2( ), fd=7:
+	any way, I'm leaving
+
+DISCONNECT: sockfd 7, id 2 last nickname  
+the master is inpatient.  server shutting down.
+---  2016-06-22 Wednesday 17:10:09 ---
+==============================================
+
+
+
+===============================================
+--- server launched at 2016-06-22 Wednesday 17:14:30 --
+CONNECT:
+	from host 127.0.0.1, port -29029, 2016-06-22 Wednesday 17:14:31
+	sockfd=5, id=0
+CONNECT:
+	from host 127.0.0.1, port -29028, 2016-06-22 Wednesday 17:14:37
+	sockfd=6, id=1
+
+MSG from 0( ), fd=5:
+	hel
+
+CONNECT:
+	from host 127.0.0.1, port -29026, 2016-06-22 Wednesday 17:14:42
+	sockfd=7, id=2
+
+CHANGE NICKNAME:fd 7, id 2, to name "AUPE"
+
+MSG from 1( ), fd=6:
+	helloset nickname BLP
+
+
+CHANGE NICKNAME:fd 6, id 1, to name "BLP"
+
+CHANGE NICKNAME:fd 5, id 0, to name "CSPP"
+
+MSG from 2(AUPE), fd=7:
+	haha
+
+
+MSG from 0(CSPP), fd=5:
+	hello
+
+
+MSG from 1(BLP), fd=6:
+	well
+
+
+MSG from 1(BLP), fd=6:
+	I'm the easiest
+
+DISCONNECT: sockfd 7, id 2 last nickname AUPE
+DISCONNECT: sockfd 6, id 1 last nickname BLP
+DISCONNECT: sockfd 5, id 0 last nickname CSPP
+the master is inpatient.  server shutting down.
+---  2016-06-22 Wednesday 17:16:37 ---
+==============================================
+
+
+
+===============================================
+--- server launched at 2016-06-22 Wednesday 17:17:35 --
+CONNECT:
+	from host 127.0.0.1, port -29020, 2016-06-22 Wednesday 17:17:37
+	sockfd=5, id=0
+the master is inpatient.  server shutting down.
+---  2016-06-22 Wednesday 17:17:51 ---
+==============================================
+
+
+
+===============================================
+--- server launched at 2016-06-22 Wednesday 17:23:26 --
+CONNECT:
+	from host 127.0.0.1, port -29009, 2016-06-22 Wednesday 17:23:29
+	sockfd=5, id=0
+DISCONNECT: sockfd 5, id 0 last nickname  
+the master is inpatient.  server shutting down.
+---  2016-06-22 Wednesday 17:24:00 ---
+==============================================
+
+
+
+===============================================
+--- server launched at 2016-06-22 Wednesday 17:25:36 --
+CONNECT:
+	from host 127.0.0.1, port -29003, 2016-06-22 Wednesday 17:25:36
+	sockfd=5, id=0
+the master is inpatient.  server shutting down.
+---  2016-06-22 Wednesday 17:25:44 ---
+==============================================
+
+
+
+===============================================
+--- server launched at 2016-06-22 Wednesday 17:30:55 --
+CONNECT:
+	from host 127.0.0.1, port -28929, 2016-06-22 Wednesday 17:30:57
+	sockfd=5, id=0
+
+MSG from 0( ), fd=5:
+	lalala
+
+the master is inpatient.  server shutting down.
+---  2016-06-22 Wednesday 17:31:24 ---
+==============================================
+
+
+
+===============================================
+--- server launched at 2016-06-22 Wednesday 17:40:27 --
+CONNECT:
+	from host 127.0.0.1, port -28910, 2016-06-22 Wednesday 17:40:28
+	sockfd=5, id=0
+DISCONNECT: sockfd 5, id 0 last nickname  
+the master is inpatient.  server shutting down.
+---  2016-06-22 Wednesday 17:40:49 ---
+==============================================
+
